@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Quellatalo.Nin.HOCRReader</id>
+    <version>$version$</version>
+    <title>HOCRReader</title>
+    <authors>Quellatalo Nin</authors>
+    <owners>Quellatalo Nin</owners>
+    <projectUrl>https://github.com/quellatalo/HOCRReader</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An utility to read Html OCR data from Tesseract.</description>
+    <releaseNotes>
+0.0.0.1
+Initial build.
+    </releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Tesseract HTML OCR Reader</tags>
+  </metadata>
+</package>
