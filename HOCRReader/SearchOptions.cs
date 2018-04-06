@@ -1,7 +1,17 @@
 ﻿namespace Quellatalo.Nin.HOCRReader
 {
+    /// <summary>
+    /// Options for HOCR finding text.
+    /// </summary>
     public enum SearchOptions
     {
-        Exact, Containing
+        /// <summary>
+        /// Exact text.
+        /// </summary>
+        Exact,
+        /// <summary>
+        /// Containing text.
+        /// </summary>
+        Containing
     }
 }

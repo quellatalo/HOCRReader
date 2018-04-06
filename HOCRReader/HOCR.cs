@@ -4,12 +4,21 @@ using System.Xml;
 
 namespace Quellatalo.Nin.HOCRReader
 {
+    /// <summary>
+    /// Represent a HTML OCR result from Tesseract.
+    /// </summary>
     public class HOCR
     {
         private static readonly string RECTANGLE_DATA = "title";
         private XmlDocument xml;
         private string data;
+        /// <summary>
+        /// Gets pages in the OCR result.
+        /// </summary>
         public List<OCRPage> Pages { get; internal set; }
+        /// <summary>
+        /// Gets or sets the HTML OCR data.
+        /// </summary>
         public string Data
         {
             get { return data; }
@@ -53,6 +62,9 @@ namespace Quellatalo.Nin.HOCRReader
                 }
             }
         }
+        /// <summary>
+        /// Initializes a new instance of HOCR class.
+        /// </summary>
         public HOCR()
         {
             xml = new XmlDocument();
@@ -64,6 +76,10 @@ namespace Quellatalo.Nin.HOCRReader
             int x = int.Parse(ss[0]), y = int.Parse(ss[1]), ex = int.Parse(ss[2]) - x, ey = int.Parse(ss[3]) - y;
             return new Rectangle(x, y, ex, ey);
         }
+        /// <summary>
+        /// Gets all text lines in the HOCR result.
+        /// </summary>
+        /// <returns>A list of OCRLine.</returns>
         public List<OCRLine> GetLines()
         {
             List<OCRLine> result = new List<OCRLine>();
@@ -73,6 +89,12 @@ namespace Quellatalo.Nin.HOCRReader
             }
             return result;
         }
+        /// <summary>
+        /// Find all lines which contains/match a specified text.
+        /// </summary>
+        /// <param name="text">The text to find.</param>
+        /// <param name="searchOption">Whether the line contains the text, or match the text.</param>
+        /// <returns>A list of OCRLine.</returns>
         public List<OCRLine> FindAllText(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
             List<OCRLine> result = new List<OCRLine>();
@@ -82,6 +104,12 @@ namespace Quellatalo.Nin.HOCRReader
             }
             return result;
         }
+        /// <summary>
+        /// Find the first line which contains/match a specified text.
+        /// </summary>
+        /// <param name="text">The text to find.</param>
+        /// <param name="searchOption">Whether the line contains the text, or match the text.</param>
+        /// <returns>An instance of OCRLine.</returns>
         public OCRLine FindText(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
             OCRLine result = null;
