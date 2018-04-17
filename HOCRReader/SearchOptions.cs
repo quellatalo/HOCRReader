@@ -12,6 +12,14 @@
         /// <summary>
         /// Containing text.
         /// </summary>
-        Containing
+        Containing,
+        /// <summary>
+        /// Containing text (spaces ignored).
+        /// </summary>
+        Containing_Spaces_Ignored,
+        /// <summary>
+        /// Regular Expression.
+        /// </summary>
+        Regex
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace Quellatalo.Nin.HOCRReader
 {
@@ -78,6 +79,26 @@ namespace Quellatalo.Nin.HOCRReader
                         }
                     }
                     break;
+                case SearchOptions.Containing_Spaces_Ignored:
+                    string trip = text.Replace(" ","");
+                    foreach (OCRWord word in Words)
+                    {
+                        if (word.Text.Replace(" ", "").Contains(trip))
+                        {
+                            result.Add(word);
+                        }
+                    }
+                    break;
+                case SearchOptions.Regex:
+                    Regex regex = new Regex(text);
+                    foreach (OCRWord word in Words)
+                    {
+                        if (regex.IsMatch(word.Text))
+                        {
+                            result.Add(word);
+                        }
+                    }
+                    break;
             }
             return result;
         }
@@ -106,6 +127,28 @@ namespace Quellatalo.Nin.HOCRReader
                     foreach (OCRWord word in Words)
                     {
                         if (word.Text == text)
+                        {
+                            result = word;
+                            break;
+                        }
+                    }
+                    break;
+                case SearchOptions.Containing_Spaces_Ignored:
+                    string trip = text.Replace(" ", "");
+                    foreach (OCRWord word in Words)
+                    {
+                        if (word.Text.Replace(" ", "").Contains(trip))
+                        {
+                            result = word;
+                            break;
+                        }
+                    }
+                    break;
+                case SearchOptions.Regex:
+                    Regex regex = new Regex(text);
+                    foreach (OCRWord word in Words)
+                    {
+                        if (regex.IsMatch(word.Text))
                         {
                             result = word;
                             break;

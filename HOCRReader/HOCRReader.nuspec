@@ -10,8 +10,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An utility to read Html OCR data from Tesseract.</description>
     <releaseNotes>
-0.0.1.2
-Fix a critical bug with retrieving text.
+0.0.2
+Add more search options.
     </releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>Tesseract HTML OCR Reader</tags>
