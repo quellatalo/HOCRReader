@@ -49,10 +49,17 @@ namespace Quellatalo.Nin.HOCRReader
                             {
                                 OCRLine line = new OCRLine
                                 {
-                                    Rectangle = extractRectangle(node3.Attributes[RECTANGLE_DATA].Value),
-                                    Text = node3.InnerText
+                                    Rectangle = extractRectangle(node3.Attributes[RECTANGLE_DATA].Value)
                                 };
-                                par.Lines.Add(line);
+                                foreach (XmlNode node4 in node3.ChildNodes)
+                                {
+                                    OCRWord word = new OCRWord
+                                    {
+                                        Rectangle = extractRectangle(node4.Attributes[RECTANGLE_DATA].Value),
+                                        Text = node4.InnerText
+                                    };
+                                    line.Words.Add(word);
+                                }
                             }
                             block.Pars.Add(par);
                         }
