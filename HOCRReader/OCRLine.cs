@@ -42,7 +42,7 @@ namespace Quellatalo.Nin.HOCRReader
         {
             string rs = "";
             int i = 0;
-            for (; i <= Words.Count; i++)
+            for (; i < Words.Count - 1; i++)
             {
                 rs += Words[i].Text + " ";
             }
