@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace Quellatalo.Nin.HOCRReader
 {
@@ -37,7 +38,7 @@ namespace Quellatalo.Nin.HOCRReader
                 case SearchOptions.Containing:
                     foreach (OCRLine line in Lines)
                     {
-                        if (line.Text.Contains(text))
+                        if (line.FindWord(text, searchOption) != null)
                         {
                             result.Add(line);
                         }
@@ -46,7 +47,27 @@ namespace Quellatalo.Nin.HOCRReader
                 case SearchOptions.Exact:
                     foreach (OCRLine line in Lines)
                     {
-                        if (line.Text == text)
+                        if (line.GetText() == text)
+                        {
+                            result.Add(line);
+                        }
+                    }
+                    break;
+                case SearchOptions.Containing_Spaces_Ignored:
+                    string trip = text.Replace(" ", "");
+                    foreach (OCRLine line in Lines)
+                    {
+                        if (line.GetNoSpacesText().Contains(trip))
+                        {
+                            result.Add(line);
+                        }
+                    }
+                    break;
+                case SearchOptions.Regex:
+                    Regex regex = new Regex(text);
+                    foreach (OCRLine line in Lines)
+                    {
+                        if (regex.IsMatch(line.GetText()))
                         {
                             result.Add(line);
                         }
@@ -69,7 +90,7 @@ namespace Quellatalo.Nin.HOCRReader
                 case SearchOptions.Containing:
                     foreach (OCRLine line in Lines)
                     {
-                        if (line.Text.Contains(text))
+                        if (line.FindWord(text, searchOption) != null)
                         {
                             result = line;
                             break;
@@ -79,7 +100,29 @@ namespace Quellatalo.Nin.HOCRReader
                 case SearchOptions.Exact:
                     foreach (OCRLine line in Lines)
                     {
-                        if (line.Text == text)
+                        if (line.GetText() == text)
+                        {
+                            result = line;
+                            break;
+                        }
+                    }
+                    break;
+                case SearchOptions.Containing_Spaces_Ignored:
+                    string trip = text.Replace(" ", "");
+                    foreach (OCRLine line in Lines)
+                    {
+                        if (line.GetNoSpacesText().Contains(trip))
+                        {
+                            result = line;
+                            break;
+                        }
+                    }
+                    break;
+                case SearchOptions.Regex:
+                    Regex regex = new Regex(text);
+                    foreach (OCRLine line in Lines)
+                    {
+                        if (regex.IsMatch(line.GetText()))
                         {
                             result = line;
                             break;

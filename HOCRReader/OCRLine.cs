@@ -51,12 +51,25 @@ namespace Quellatalo.Nin.HOCRReader
             return rs;
         }
         /// <summary>
+        /// Gets the text in the line without spaces.
+        /// </summary>
+        public string GetNoSpacesText()
+        {
+            string rs = "";
+            int i = 0;
+            for (; i < Words.Count; i++)
+            {
+                rs += Words[i].Text;
+            }
+            return rs;
+        }
+        /// <summary>
         /// Find all lines which contains/match a specified text.
         /// </summary>
         /// <param name="text">The text to find.</param>
         /// <param name="searchOption">Whether the line contains the text, or match the text.</param>
         /// <returns>A list of OCRLine.</returns>
-        public List<OCRWord> FindAllText(string text, SearchOptions searchOption = SearchOptions.Containing)
+        public List<OCRWord> FindAllWord(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
             List<OCRWord> result = new List<OCRWord>();
             switch (searchOption)
@@ -80,10 +93,10 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Containing_Spaces_Ignored:
-                    string trip = text.Replace(" ","");
+                    string trip = text.Replace(" ", "");
                     foreach (OCRWord word in Words)
                     {
-                        if (word.Text.Replace(" ", "").Contains(trip))
+                        if (word.Text.Contains(trip))
                         {
                             result.Add(word);
                         }
@@ -108,7 +121,7 @@ namespace Quellatalo.Nin.HOCRReader
         /// <param name="text">The text to find.</param>
         /// <param name="searchOption">Whether the line contains the text, or match the text.</param>
         /// <returns>An instance of OCRLine.</returns>
-        public OCRWord FindText(string text, SearchOptions searchOption = SearchOptions.Containing)
+        public OCRWord FindWord(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
             OCRWord result = null;
             switch (searchOption)
@@ -137,7 +150,7 @@ namespace Quellatalo.Nin.HOCRReader
                     string trip = text.Replace(" ", "");
                     foreach (OCRWord word in Words)
                     {
-                        if (word.Text.Replace(" ", "").Contains(trip))
+                        if (word.Text.Contains(trip))
                         {
                             result = word;
                             break;
