@@ -10,8 +10,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An utility to read Html OCR data from Tesseract.</description>
     <releaseNotes>
-0.0.1.0
-Add OCRWord class to handle spaces.
+0.0.1.1
+Fix a critical bug with reading HOCR data.
     </releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>Tesseract HTML OCR Reader</tags>

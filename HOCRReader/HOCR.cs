@@ -60,6 +60,7 @@ namespace Quellatalo.Nin.HOCRReader
                                     };
                                     line.Words.Add(word);
                                 }
+                                par.Lines.Add(line);
                             }
                             block.Pars.Add(par);
                         }
