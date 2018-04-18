@@ -71,6 +71,7 @@ namespace Quellatalo.Nin.HOCRReader
         /// <returns>A list of OCRLine.</returns>
         public List<OCRWord> FindAllWord(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
+            string trip = text.Replace(" ", "");
             List<OCRWord> result = new List<OCRWord>();
             switch (searchOption)
             {
@@ -92,8 +93,16 @@ namespace Quellatalo.Nin.HOCRReader
                         }
                     }
                     break;
+                case SearchOptions.Spaces_Ignored:
+                    foreach (OCRWord word in Words)
+                    {
+                        if (word.Text == trip)
+                        {
+                            result.Add(word);
+                        }
+                    }
+                    break;
                 case SearchOptions.Containing_Spaces_Ignored:
-                    string trip = text.Replace(" ", "");
                     foreach (OCRWord word in Words)
                     {
                         if (word.Text.Contains(trip))
@@ -123,6 +132,7 @@ namespace Quellatalo.Nin.HOCRReader
         /// <returns>An instance of OCRLine.</returns>
         public OCRWord FindWord(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
+            string trip = text.Replace(" ", "");
             OCRWord result = null;
             switch (searchOption)
             {
@@ -146,8 +156,17 @@ namespace Quellatalo.Nin.HOCRReader
                         }
                     }
                     break;
+                case SearchOptions.Spaces_Ignored:
+                    foreach (OCRWord word in Words)
+                    {
+                        if (word.Text == trip)
+                        {
+                            result = word;
+                            break;
+                        }
+                    }
+                    break;
                 case SearchOptions.Containing_Spaces_Ignored:
-                    string trip = text.Replace(" ", "");
                     foreach (OCRWord word in Words)
                     {
                         if (word.Text.Contains(trip))

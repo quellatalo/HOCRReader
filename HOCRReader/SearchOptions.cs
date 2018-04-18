@@ -10,6 +10,10 @@
         /// </summary>
         Exact,
         /// <summary>
+        /// Spaces ignored.
+        /// </summary>
+        Spaces_Ignored,
+        /// <summary>
         /// Containing text.
         /// </summary>
         Containing,

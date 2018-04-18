@@ -32,6 +32,7 @@ namespace Quellatalo.Nin.HOCRReader
         /// <returns>A list of OCRLine.</returns>
         public List<OCRLine> FindAllText(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
+            string trip = text.Replace(" ", "");
             List<OCRLine> result = new List<OCRLine>();
             switch (searchOption)
             {
@@ -53,8 +54,16 @@ namespace Quellatalo.Nin.HOCRReader
                         }
                     }
                     break;
+                case SearchOptions.Spaces_Ignored:
+                    foreach (OCRLine line in Lines)
+                    {
+                        if (line.GetNoSpacesText() == trip)
+                        {
+                            result.Add(line);
+                        }
+                    }
+                    break;
                 case SearchOptions.Containing_Spaces_Ignored:
-                    string trip = text.Replace(" ", "");
                     foreach (OCRLine line in Lines)
                     {
                         if (line.GetNoSpacesText().Contains(trip))
@@ -84,6 +93,7 @@ namespace Quellatalo.Nin.HOCRReader
         /// <returns>An instance of OCRLine.</returns>
         public OCRLine FindText(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
+            string trip = text.Replace(" ", "");
             OCRLine result = null;
             switch (searchOption)
             {
@@ -107,8 +117,17 @@ namespace Quellatalo.Nin.HOCRReader
                         }
                     }
                     break;
+                case SearchOptions.Spaces_Ignored:
+                    foreach (OCRLine line in Lines)
+                    {
+                        if (line.GetNoSpacesText() == trip)
+                        {
+                            result = line;
+                            break;
+                        }
+                    }
+                    break;
                 case SearchOptions.Containing_Spaces_Ignored:
-                    string trip = text.Replace(" ", "");
                     foreach (OCRLine line in Lines)
                     {
                         if (line.GetNoSpacesText().Contains(trip))
