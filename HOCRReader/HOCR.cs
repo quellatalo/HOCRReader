@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
-
+// TODO:
+// - make immutable
+// - functional approach for SearchOptions
 namespace Quellatalo.Nin.HOCRReader
 {
     /// <summary>
