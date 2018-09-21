@@ -24,6 +24,10 @@
         /// <summary>
         /// Regular Expression.
         /// </summary>
-        Regex
+        Regex,
+        /// <summary>
+        /// Regular Expression (spaces ignored).
+        /// </summary>
+        Regex_Spaces_Ignored
     }
 }

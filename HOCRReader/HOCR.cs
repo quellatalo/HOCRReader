@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
-// TODO:
-// - make immutable
-// - functional approach for SearchOptions
 namespace Quellatalo.Nin.HOCRReader
 {
     /// <summary>
@@ -31,35 +28,19 @@ namespace Quellatalo.Nin.HOCRReader
                 Pages.Clear();
                 foreach (XmlNode node in xml.ChildNodes)
                 {
-                    OCRPage page = new OCRPage
-                    {
-                        Rectangle = extractRectangle(node.Attributes[RECTANGLE_DATA].Value)
-                    };
+                    OCRPage page = new OCRPage(extractRectangle(node.Attributes[RECTANGLE_DATA].Value));
                     foreach (XmlNode node1 in node.ChildNodes)
                     {
-                        OCRBlock block = new OCRBlock
-                        {
-                            Rectangle = extractRectangle(node1.Attributes[RECTANGLE_DATA].Value)
-                        };
+                        OCRBlock block = new OCRBlock(extractRectangle(node1.Attributes[RECTANGLE_DATA].Value));
                         foreach (XmlNode node2 in node1.ChildNodes)
                         {
-                            OCRPar par = new OCRPar
-                            {
-                                Rectangle = extractRectangle(node2.Attributes[RECTANGLE_DATA].Value)
-                            };
+                            OCRPar par = new OCRPar(extractRectangle(node2.Attributes[RECTANGLE_DATA].Value));
                             foreach (XmlNode node3 in node2.ChildNodes)
                             {
-                                OCRLine line = new OCRLine
-                                {
-                                    Rectangle = extractRectangle(node3.Attributes[RECTANGLE_DATA].Value)
-                                };
+                                OCRLine line = new OCRLine(extractRectangle(node3.Attributes[RECTANGLE_DATA].Value));
                                 foreach (XmlNode node4 in node3.ChildNodes)
                                 {
-                                    OCRWord word = new OCRWord
-                                    {
-                                        Rectangle = extractRectangle(node4.Attributes[RECTANGLE_DATA].Value),
-                                        Text = node4.InnerText
-                                    };
+                                    OCRWord word = new OCRWord(extractRectangle(node4.Attributes[RECTANGLE_DATA].Value), node4.InnerText);
                                     line.Words.Add(word);
                                 }
                                 par.Lines.Add(line);

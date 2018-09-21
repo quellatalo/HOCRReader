@@ -9,20 +9,30 @@ namespace Quellatalo.Nin.HOCRReader
     /// </summary>
     public class OCRPar
     {
+        private readonly Rectangle rectangle;
+        private readonly List<OCRLine> lines;
         /// <summary>
         /// Gets the rectangle of the paragraph.
         /// </summary>
-        public Rectangle Rectangle { get; internal set; }
+        public Rectangle Rectangle => rectangle;
         /// <summary>
         /// Gets all text lines in the paragraph.
         /// </summary>
-        public List<OCRLine> Lines { get; internal set; }
+        public List<OCRLine> Lines => lines;
         /// <summary>
         /// Initializes a new instance of OCRPar class.
         /// </summary>
-        public OCRPar()
+        /// <param name="rectangle">The rectangle of the paragraph.</param>
+        public OCRPar(Rectangle rectangle) : this(rectangle, new List<OCRLine>()) { }
+        /// <summary>
+        /// Initializes a new instance of OCRPar class.
+        /// </summary>
+        /// <param name="rectangle">The rectangle of the paragraph.</param>
+        /// <param name="lines">The lines in the paragraph.</param>
+        public OCRPar(Rectangle rectangle, List<OCRLine> lines)
         {
-            Lines = new List<OCRLine>();
+            this.rectangle = rectangle;
+            this.lines = lines;
         }
         /// <summary>
         /// Find all lines which contains/match a specified text.
@@ -32,7 +42,8 @@ namespace Quellatalo.Nin.HOCRReader
         /// <returns>A list of OCRLine.</returns>
         public List<OCRLine> FindAllText(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
-            string trip = text.Replace(" ", "");
+            string trip;
+            Regex regex;
             List<OCRLine> result = new List<OCRLine>();
             switch (searchOption)
             {
@@ -55,6 +66,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Spaces_Ignored:
+                    trip = text.Replace(" ", "");
                     foreach (OCRLine line in Lines)
                     {
                         if (line.GetNoSpacesText() == trip)
@@ -64,6 +76,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Containing_Spaces_Ignored:
+                    trip = text.Replace(" ", "");
                     foreach (OCRLine line in Lines)
                     {
                         if (line.GetNoSpacesText().Contains(trip))
@@ -73,10 +86,20 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Regex:
-                    Regex regex = new Regex(text);
+                    regex = new Regex(text);
                     foreach (OCRLine line in Lines)
                     {
                         if (regex.IsMatch(line.GetText()))
+                        {
+                            result.Add(line);
+                        }
+                    }
+                    break;
+                case SearchOptions.Regex_Spaces_Ignored:
+                    regex = new Regex(text);
+                    foreach (OCRLine line in Lines)
+                    {
+                        if (regex.IsMatch(line.GetNoSpacesText()))
                         {
                             result.Add(line);
                         }
@@ -93,8 +116,9 @@ namespace Quellatalo.Nin.HOCRReader
         /// <returns>An instance of OCRLine.</returns>
         public OCRLine FindText(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
-            string trip = text.Replace(" ", "");
+            string trip;
             OCRLine result = null;
+            Regex regex;
             switch (searchOption)
             {
                 case SearchOptions.Containing:
@@ -118,6 +142,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Spaces_Ignored:
+                    trip = text.Replace(" ", "");
                     foreach (OCRLine line in Lines)
                     {
                         if (line.GetNoSpacesText() == trip)
@@ -128,6 +153,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Containing_Spaces_Ignored:
+                    trip = text.Replace(" ", "");
                     foreach (OCRLine line in Lines)
                     {
                         if (line.GetNoSpacesText().Contains(trip))
@@ -138,10 +164,21 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Regex:
-                    Regex regex = new Regex(text);
+                    regex = new Regex(text);
                     foreach (OCRLine line in Lines)
                     {
                         if (regex.IsMatch(line.GetText()))
+                        {
+                            result = line;
+                            break;
+                        }
+                    }
+                    break;
+                case SearchOptions.Regex_Spaces_Ignored:
+                    regex = new Regex(text);
+                    foreach (OCRLine line in Lines)
+                    {
+                        if (regex.IsMatch(line.GetNoSpacesText()))
                         {
                             result = line;
                             break;

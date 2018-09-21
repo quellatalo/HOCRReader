@@ -8,20 +8,30 @@ namespace Quellatalo.Nin.HOCRReader
     /// </summary>
     public class OCRBlock
     {
+        private readonly Rectangle rectangle;
+        private readonly List<OCRPar> pars;
         /// <summary>
         /// Gets the rectangle of the block.
         /// </summary>
-        public Rectangle Rectangle { get; internal set; }
+        public Rectangle Rectangle => rectangle;
         /// <summary>
         /// Gets the paragraphs in the block.
         /// </summary>
-        public List<OCRPar> Pars { get; internal set; }
+        public List<OCRPar> Pars => pars;
         /// <summary>
         /// Initializes a new instance of OCRBlock class.
         /// </summary>
-        public OCRBlock()
+        /// <param name="rectangle">The rectangle of the block.</param>
+        public OCRBlock(Rectangle rectangle) : this(rectangle, new List<OCRPar>()) { }
+        /// <summary>
+        /// Initializes a new instance of OCRBlock class.
+        /// </summary>
+        /// <param name="rectangle">The rectangle of the block.</param>
+        /// <param name="pars">The paragraphs in the block.</param>
+        public OCRBlock(Rectangle rectangle, List<OCRPar> pars)
         {
-            Pars = new List<OCRPar>();
+            this.rectangle = rectangle;
+            this.pars = new List<OCRPar>();
         }
         /// <summary>
         /// Gets all text lines in the block.

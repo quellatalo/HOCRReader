@@ -10,20 +10,30 @@ namespace Quellatalo.Nin.HOCRReader
     /// </summary>
     public class OCRLine
     {
+        private readonly Rectangle rectangle;
+        private readonly List<OCRWord> words;
         /// <summary>
-        /// Gets the rectangle of the paragraph.
+        /// Gets the rectangle of the line.
         /// </summary>
-        public Rectangle Rectangle { get; internal set; }
+        public Rectangle Rectangle => rectangle;
         /// <summary>
-        /// Gets all text lines in the paragraph.
+        /// Gets all words in the line.
         /// </summary>
-        public List<OCRWord> Words { get; internal set; }
+        public List<OCRWord> Words => words;
         /// <summary>
         /// Initializes a new instance of OCRPar class.
         /// </summary>
-        public OCRLine()
+        /// <param name="rectangle">The rectangle of the line.</param>
+        public OCRLine(Rectangle rectangle) : this(rectangle, new List<OCRWord>()) { }
+        /// <summary>
+        /// Initializes a new instance of OCRPar class.
+        /// </summary>
+        /// <param name="rectangle">The rectangle of the line.</param>
+        /// <param name="words">The words in the line.</param>
+        public OCRLine(Rectangle rectangle, List<OCRWord> words)
         {
-            Words = new List<OCRWord>();
+            this.rectangle = rectangle;
+            this.words = words;
         }
         /// <summary>
         /// Gets the text in the line.
@@ -71,7 +81,7 @@ namespace Quellatalo.Nin.HOCRReader
         /// <returns>A list of OCRLine.</returns>
         public List<OCRWord> FindAllWord(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
-            string trip = text.Replace(" ", "");
+            string trip;
             List<OCRWord> result = new List<OCRWord>();
             switch (searchOption)
             {
@@ -94,6 +104,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Spaces_Ignored:
+                    trip = text.Replace(" ", "");
                     foreach (OCRWord word in Words)
                     {
                         if (word.Text == trip)
@@ -103,6 +114,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Containing_Spaces_Ignored:
+                    trip = text.Replace(" ", "");
                     foreach (OCRWord word in Words)
                     {
                         if (word.Text.Contains(trip))
@@ -112,6 +124,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Regex:
+                case SearchOptions.Regex_Spaces_Ignored:
                     Regex regex = new Regex(text);
                     foreach (OCRWord word in Words)
                     {
@@ -132,7 +145,7 @@ namespace Quellatalo.Nin.HOCRReader
         /// <returns>An instance of OCRLine.</returns>
         public OCRWord FindWord(string text, SearchOptions searchOption = SearchOptions.Containing)
         {
-            string trip = text.Replace(" ", "");
+            string trip;
             OCRWord result = null;
             switch (searchOption)
             {
@@ -157,6 +170,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Spaces_Ignored:
+                    trip = text.Replace(" ", "");
                     foreach (OCRWord word in Words)
                     {
                         if (word.Text == trip)
@@ -167,6 +181,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Containing_Spaces_Ignored:
+                    trip = text.Replace(" ", "");
                     foreach (OCRWord word in Words)
                     {
                         if (word.Text.Contains(trip))
@@ -177,6 +192,7 @@ namespace Quellatalo.Nin.HOCRReader
                     }
                     break;
                 case SearchOptions.Regex:
+                case SearchOptions.Regex_Spaces_Ignored:
                     Regex regex = new Regex(text);
                     foreach (OCRWord word in Words)
                     {
