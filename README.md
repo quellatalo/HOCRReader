@@ -4,7 +4,7 @@ An utility to read Html OCR data from Tesseract.
 
 ### Installation
 
-The package is available on Nuget: [Quellatalo.Nin.TheHands](https://www.nuget.org/packages/Quellatalo.Nin.HOCRReader
+The package is available on Nuget: [Quellatalo.Nin.HOCRReader](https://www.nuget.org/packages/Quellatalo.Nin.HOCRReader)
 
 ## Example code
 _(Working together with [TheEyes](https://github.com/quellatalo/TheEyes) library)_
