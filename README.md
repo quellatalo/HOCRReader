@@ -11,8 +11,8 @@ _(Working together with [TheEyes](https://github.com/quellatalo/TheEyes) library
 ```cs
 /// <summary>
 /// A test to run on windows 8 and later.
-/// This code will prepare a tesseract ocr for Japanese,
-/// find the "‚é" character in an image and highlight the lines containing them into another new image file.
+/// This code will prepare a tesseract ocr for English,
+/// find the lines with the "great" word in them, and highlight those lines as another new image file.
 /// Please prepare tesseract, tessdata folder, original image and update the parameters accordingly.
 /// </summary>
 using Quellatalo.Nin.TheEyes.Imaging;
@@ -24,7 +24,7 @@ using System.Threading;
 
 void HOCRTest()
 {
-    Tesseract tesseract = new Tesseract(@"path\to\tessdata", "jpn", OcrEngineMode.TesseractLstmCombined)
+    Tesseract tesseract = new Tesseract(@"path\to\tessdata", "eng", OcrEngineMode.TesseractLstmCombined)
     {
         PageSegMode = PageSegMode.SparseText
     };
@@ -35,7 +35,7 @@ void HOCRTest()
         tesseract.SetImage(b);
         HOCR hOCR = new HOCR(tesseract.GetHOCRText());
 		// find all lines that contain Japanese 'ru' character and highlight them
-        List<OCRLine> foundLines = hOCR.FindAllText("‚é");
+        List<OCRLine> foundLines = hOCR.FindAllText("great");
         foreach (OCRLine line in foundLines)
         {
             GraphicX.Instance.Highlight(g, line.Rectangle, Pens.Red);
