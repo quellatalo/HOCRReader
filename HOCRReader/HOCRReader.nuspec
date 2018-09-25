@@ -10,8 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An utility to read Html OCR data from Tesseract.</description>
     <releaseNotes>
-0.0.3
-Add more search option.
+      Make parsed data immutable.
     </releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>Tesseract HTML OCR Reader</tags>

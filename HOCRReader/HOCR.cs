@@ -61,6 +61,14 @@ namespace Quellatalo.Nin.HOCRReader
             xml = new XmlDocument();
             Pages = new List<OCRPage>();
         }
+        /// <summary>
+        /// Initializes a new instance of HOCR class.
+        /// </summary>
+        /// <param name="data">The HTML OCR data.</param>
+        public HOCR(string data):this()
+        {
+            Data = data;
+        }
         private Rectangle extractRectangle(string str)
         {
             string[] ss = str.Substring(str.IndexOf("bbox") + 5).Split(';')[0].Split(' ');
