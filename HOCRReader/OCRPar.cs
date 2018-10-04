@@ -9,16 +9,14 @@ namespace Quellatalo.Nin.HOCRReader
     /// </summary>
     public class OCRPar
     {
-        private readonly Rectangle rectangle;
-        private readonly List<OCRLine> lines;
         /// <summary>
         /// Gets the rectangle of the paragraph.
         /// </summary>
-        public Rectangle Rectangle => rectangle;
+        public Rectangle Rectangle { get; }
         /// <summary>
         /// Gets all text lines in the paragraph.
         /// </summary>
-        public List<OCRLine> Lines => lines;
+        public List<OCRLine> Lines { get; }
         /// <summary>
         /// Initializes a new instance of OCRPar class.
         /// </summary>
@@ -31,8 +29,8 @@ namespace Quellatalo.Nin.HOCRReader
         /// <param name="lines">The lines in the paragraph.</param>
         public OCRPar(Rectangle rectangle, List<OCRLine> lines)
         {
-            this.rectangle = rectangle;
-            this.lines = lines;
+            Rectangle = rectangle;
+            Lines = lines;
         }
         /// <summary>
         /// Find all lines which contains/match a specified text.

@@ -8,16 +8,14 @@ namespace Quellatalo.Nin.HOCRReader
     /// </summary>
     public class OCRPage
     {
-        private readonly Rectangle rectangle;
-        private readonly List<OCRBlock> blocks;
         /// <summary>
         /// Gets the rectangle of the page.
         /// </summary>
-        public Rectangle Rectangle => rectangle;
+        public Rectangle Rectangle { get; }
         /// <summary>
         /// Gets the OCR blocks in the page.
         /// </summary>
-        public List<OCRBlock> Blocks => blocks;
+        public List<OCRBlock> Blocks { get; }
         /// <summary>
         /// Initializes a new instance of OCRPage class.
         /// </summary>
@@ -30,8 +28,8 @@ namespace Quellatalo.Nin.HOCRReader
         /// <param name="blocks">The OCR blocks in the page.</param>
         public OCRPage(Rectangle rectangle, List<OCRBlock> blocks)
         {
-            this.rectangle = rectangle;
-            this.blocks = blocks;
+            Rectangle = rectangle;
+            Blocks = blocks;
         }
         /// <summary>
         /// Gets all text lines in the page.

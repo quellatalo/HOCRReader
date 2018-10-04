@@ -9,12 +9,11 @@ namespace Quellatalo.Nin.HOCRReader
     public class HOCR
     {
         private static readonly string RECTANGLE_DATA = "title";
-        private XmlDocument xml;
         private string data;
         /// <summary>
         /// Gets pages in the OCR result.
         /// </summary>
-        public List<OCRPage> Pages { get; internal set; }
+        public List<OCRPage> Pages { get; }
         /// <summary>
         /// Gets or sets the HTML OCR data.
         /// </summary>
@@ -24,6 +23,7 @@ namespace Quellatalo.Nin.HOCRReader
             set
             {
                 data = value;
+                XmlDocument xml = new XmlDocument();
                 xml.LoadXml(data);
                 Pages.Clear();
                 foreach (XmlNode node in xml.ChildNodes)
@@ -58,7 +58,6 @@ namespace Quellatalo.Nin.HOCRReader
         /// </summary>
         public HOCR()
         {
-            xml = new XmlDocument();
             Pages = new List<OCRPage>();
         }
         /// <summary>

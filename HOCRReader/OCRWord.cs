@@ -7,18 +7,16 @@ namespace Quellatalo.Nin.HOCRReader
 {
     public class OCRWord
     {
-        private readonly Rectangle rectangle;
-        private readonly string text;
 
         /// <summary>
         /// Gets the rectangle of the word.
         /// </summary>
-        public Rectangle Rectangle => rectangle;
-        
+        public Rectangle Rectangle { get; }
+
         /// <summary>
         /// Gets the text.
         /// </summary>
-        public string Text => text;
+        public string Text { get; }
 
         /// <summary>
         /// Initializes a new instance of OCRWord class.
@@ -27,8 +25,8 @@ namespace Quellatalo.Nin.HOCRReader
         /// <param name="text">The Text.</param>
         public OCRWord(Rectangle rectangle, string text)
         {
-            this.rectangle = rectangle;
-            this.text = text;
+            Rectangle = rectangle;
+            Text = text;
         }
     }
 }

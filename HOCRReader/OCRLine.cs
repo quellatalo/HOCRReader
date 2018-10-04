@@ -10,16 +10,14 @@ namespace Quellatalo.Nin.HOCRReader
     /// </summary>
     public class OCRLine
     {
-        private readonly Rectangle rectangle;
-        private readonly List<OCRWord> words;
         /// <summary>
         /// Gets the rectangle of the line.
         /// </summary>
-        public Rectangle Rectangle => rectangle;
+        public Rectangle Rectangle { get; }
         /// <summary>
         /// Gets all words in the line.
         /// </summary>
-        public List<OCRWord> Words => words;
+        public List<OCRWord> Words { get; }
         /// <summary>
         /// Initializes a new instance of OCRPar class.
         /// </summary>
@@ -32,8 +30,8 @@ namespace Quellatalo.Nin.HOCRReader
         /// <param name="words">The words in the line.</param>
         public OCRLine(Rectangle rectangle, List<OCRWord> words)
         {
-            this.rectangle = rectangle;
-            this.words = words;
+            Rectangle = rectangle;
+            Words = words;
         }
         /// <summary>
         /// Gets the text in the line.
